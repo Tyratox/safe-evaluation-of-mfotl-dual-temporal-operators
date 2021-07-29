@@ -56,7 +56,7 @@ df = df.groupby(['experiment', 'asymptotic']).agg({
 plt.rcParams.update({
     "text.usetex": True
 })
-plt.rcParams["figure.figsize"] = (8, 4)
+plt.rcParams["figure.figsize"] = (8, 2)
 
 
 def map_label(s):
@@ -65,7 +65,8 @@ def map_label(s):
     elif s.endswith("n"):
         return r'$' + s.replace("n", r'n') + r'$'
     elif s.endswith("c"):
-        return r'$' + s.replace("c", r'\left( l \cdot n \right)') + r'$'
+        i = s[:-1]
+        return r'$' + i + r'l, \:' + i + r'n' + r'$'
     else:
         return s
 
@@ -138,21 +139,40 @@ for experiment_name in experiments:
     # rects_native = ax.bar(x + width/2, native_means, width,
     #                       label='native', yerr=native_stds, ecolor='black', capsize=2, color='#e67e22')
     ax1.bar(x1, rewritten_meval_means[0:baseline2Index], width, label='meval', yerr=rewritten_meval_stds[0:baseline2Index],
-            ecolor='black', capsize=2, color='tab:orange')  # , color='#d35400'
+            ecolor='black', capsize=2, color='tab:purple')  # , color='#d35400'
 
     ax1.set_ylim(bottom=0)
-    ax1.plot(linearFunctionX_l, linearFunctionY_l, 'black', linestyle='solid')
-    custom_lines1 = [Line2D([0], [0], color="black", lw=1, linestyle='solid')]
-    ax1.legend(custom_lines1, [
+    ax1.plot(linearFunctionX_l, linearFunctionY_l, 'black', linestyle='dashed')
+    custom_lines1 = [Line2D([0], [0], color="black", lw=1, linestyle='dashed')]
+    legend1 = [
         str(round(a_l, 1)) + r'$\: \cdot \: x \: ' +
-        (r'+' if b_l >= 0 else r'-') + str(round(abs(b_l), 1)) + r'$'])
+        (r'+' if b_l >= 0 else r'-') + str(round(abs(b_l), 1)) + r'$']
+
+    if "a-" in experiment_name:
+        B_l = np.vstack([x_l*x_l, x_l, np.ones(len(x_l))]).T
+        m_l, p_l, q_l = np.linalg.lstsq(
+            B_l, rewritten_meval_means[0:baseline2Index], rcond=None)[0]
+
+        quadraticFunctionX_l = np.linspace(0, baseline2Index-1, 100)
+        quadraticFunctionY_l = m_l * ((quadraticFunctionX_l) ** 2) + p_l * (quadraticFunctionX_l) + \
+            q_l  # start at x = 2, a * x^2 + b * x + c
+
+        ax1.plot(quadraticFunctionX_l, quadraticFunctionY_l,
+                 'silver', linestyle='dashed')
+        custom_lines1.append(
+            Line2D([0], [0], color="silver", lw=1, linestyle='dashed'))
+        legend1.append(str(round(m_l, 1)) + r'$ \: \cdot \: x^2 \:' +
+                       (r'+' if p_l >= 0 else r'-') + str(round(abs(p_l), 1)) + r'\cdot x' +
+                       (r'+' if q_l >= 0 else r'-') + str(round(abs(q_l), 1)) + r'$')
+
+    ax1.legend(custom_lines1, legend1)
 
     ax1.set_xticks(x1)
     ax1.set_xticklabels(
         ["baseline" if ("baseline" in a) else map_label(a) for a in labels[0:baseline2Index]])
 
     ax2.bar(x2, rewritten_meval_means[baseline2Index:baseline3Index], width, label='meval', yerr=rewritten_meval_stds[baseline2Index:baseline3Index],
-            ecolor='black', capsize=2, color='tab:orange')  # , color='#d35400'
+            ecolor='black', capsize=2, color='tab:purple')  # , color='#d35400'
 
     ax2.set_ylim(bottom=0)
     ax2.plot(linearFunctionX_n, linearFunctionY_n, 'black', linestyle='dashed')
@@ -165,14 +185,14 @@ for experiment_name in experiments:
         ["baseline" if ("baseline" in a) else map_label(a) for a in labels[baseline2Index:baseline3Index]])
 
     ax3.bar(x3, rewritten_meval_means[baseline3Index:], width, label='meval', yerr=rewritten_meval_stds[baseline3Index:],
-            ecolor='black', capsize=2, color='tab:orange')  # , color='#d35400'
+            ecolor='black', capsize=2, color='tab:purple')  # , color='#d35400'
 
     ax3.set_ylim(bottom=0)
-    ax3.plot(linearFunctionX_c, linearFunctionY_c, 'black', linestyle='dotted')
+    ax3.plot(linearFunctionX_c, linearFunctionY_c, 'black', linestyle='dashed')
     ax3.plot(quadraticFunctionX_c, quadraticFunctionY_c,
-             'silver', linestyle='dotted')
-    custom_lines3 = [Line2D([0], [0], color="black", lw=1, linestyle='dotted'),
-                     Line2D([0], [0], color="silver", lw=1, linestyle='dotted')]
+             'silver', linestyle='dashed')
+    custom_lines3 = [Line2D([0], [0], color="black", lw=1, linestyle='dashed'),
+                     Line2D([0], [0], color="silver", lw=1, linestyle='dashed')]
     ax3.legend(custom_lines3, [
         str(round(a_c, 1)) + r'$ \: \cdot \: x \:' +
         (r'+' if b_c >= 0 else r'-') + str(round(abs(b_c), 1)) + r'$',

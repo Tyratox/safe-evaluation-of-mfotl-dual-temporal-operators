@@ -58,7 +58,7 @@ df = df.groupby(['experiment', 'asymptotic']).agg({
 plt.rcParams.update({
     "text.usetex": True
 })
-plt.rcParams["figure.figsize"] = (8, 4)
+plt.rcParams["figure.figsize"] = (8, 2)
 
 
 def map_label(s):
@@ -67,7 +67,8 @@ def map_label(s):
     elif s.endswith("n"):
         return r'$' + s.replace("n", r'n') + r'$'
     elif s.endswith("c"):
-        return r'$' + s.replace("c", r'\left( l \cdot n \right)') + r'$'
+        i = s[:-1]
+        return r'$' + i + r'l, \:' + i + r'n' + r'$'
     else:
         return s
 
@@ -147,8 +148,8 @@ for experiment_name in experiments:
             ecolor='black', capsize=2, color='tab:green')  # , color='#2ecc71'
 
     ax1.set_ylim(bottom=0)
-    ax1.plot(linearFunctionX_l, linearFunctionY_l, 'black', linestyle='solid')
-    custom_lines1 = [Line2D([0], [0], color="black", lw=1, linestyle='solid')]
+    ax1.plot(linearFunctionX_l, linearFunctionY_l, 'black', linestyle='dashed')
+    custom_lines1 = [Line2D([0], [0], color="black", lw=1, linestyle='dashed')]
     ax1.legend(custom_lines1, [
         str(round(a_l, 1)) + r'$\: \cdot \: x \: ' +
         (r'+' if b_l >= 0 else r'-') + str(round(abs(b_l), 1)) + r'$'])
@@ -178,11 +179,11 @@ for experiment_name in experiments:
             ecolor='black', capsize=2, color='tab:green')  # , color='#2ecc71'
 
     ax3.set_ylim(bottom=0)
-    ax3.plot(linearFunctionX_c, linearFunctionY_c, 'black', linestyle='dotted')
+    ax3.plot(linearFunctionX_c, linearFunctionY_c, 'black', linestyle='dashed')
     ax3.plot(quadraticFunctionX_c, quadraticFunctionY_c,
-             'silver', linestyle='dotted')
-    custom_lines3 = [Line2D([0], [0], color="black", lw=1, linestyle='dotted'),
-                     Line2D([0], [0], color="silver", lw=1, linestyle='dotted')]
+             'silver', linestyle='dashed')
+    custom_lines3 = [Line2D([0], [0], color="black", lw=1, linestyle='dashed'),
+                     Line2D([0], [0], color="silver", lw=1, linestyle='dashed')]
     ax3.legend(custom_lines3, [
         str(round(a_c, 1)) + r'$ \: \cdot \: x \:' +
         (r'+' if b_c >= 0 else r'-') + str(round(abs(b_c), 1)) + r'$',
