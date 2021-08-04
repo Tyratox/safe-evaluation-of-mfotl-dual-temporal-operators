@@ -7,6 +7,9 @@ import pandas as pd
 parser = argparse.ArgumentParser()
 parser.add_argument('--measurements',
                     help='The measurement csv', required=True)
+parser.add_argument('--stds', dest='stds', action='store_true')
+parser.set_defaults(stds=False)
+
 parser.add_argument('--output',
                     help='The output path', required=True)
 #parser.add_argument( '--yscale', help='The scale of the y-axis. Default: linear')
@@ -16,6 +19,7 @@ args = parser.parse_args()
 
 measurements = args.measurements
 output = args.output
+use_stds = args.stds
 #yscale = args.yscale
 
 df = pd.read_csv(measurements, sep=";", quotechar='"', skipinitialspace=True)
@@ -87,14 +91,19 @@ df.columns = [col[1] + " " + col[0]
               if col[1] != '' else col[0] for col in df.columns.values]
 df = df.round(2).astype(str)
 
-df['translated formula'] = r'$' + df['mean rewritten meval time'] + r'$'
-#r' \pm ' + df['std rewritten meval time'] + r'$'
+if use_stds:
+    df['translated formula'] = r'$' + df['mean rewritten meval time'] + \
+        r' \pm ' + df['std rewritten meval time'] + r'$'
+    df['specialized algorithm'] = r'$' + df['mean native meval time'] + \
+        r' \pm ' + df['std native meval time'] + r'$'
+    df[r'\texttt{mtaux}'] = r'$' + df['mean native trigger time'] + \
+        r' \pm ' + df['std native trigger time'] + r'$'
+else:
+    df['translated formula'] = r'$' + df['mean rewritten meval time'] + r'$'
 
-df['specialized algorithm'] = r'$' + df['mean native meval time'] + r'$'
-# r' \pm ' + \ df['std native meval time'] + r'$'
+    df['specialized algorithm'] = r'$' + df['mean native meval time'] + r'$'
 
-df[r'\texttt{mtaux}'] = r'$' + df['mean native trigger time'] + r'$'
-#+ r' \pm ' + df['std native trigger time'] + r'$'
+    df[r'\texttt{mtaux}'] = r'$' + df['mean native trigger time'] + r'$'
 
 df[['formula', 'pattern', 'translated formula', 'specialized algorithm', r'\texttt{mtaux}']
    ].to_latex(os.path.join(output, "table.tex"), index=False, column_format="l l p {2cm} p {2cm} l", escape=False)
