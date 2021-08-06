@@ -1,6 +1,8 @@
 # Setup
 
-1. Build `monpoly` from the code of [commit ea2a4d4](https://bitbucket.org/jshs/monpoly/commits/c84bf85bf3423fbe10130889fadaa47b39d6a414).
+1. Build `monpoly` from the code of [commit ea2a4d4](https://bitbucket.org/jshs/monpoly/commits/c84bf85bf3423fbe10130889fadaa47b39d6a414): [Download](https://bitbucket.org/jshs/monpoly/get/c84bf85bf3423fbe10130889fadaa47b39d6a414.tar.gz
+
+).
 2. Download this git repo and override the files in `monpoly/trigger-performance-evaluation` and `monpoly/release-performance-evaluation` with the files located in `trigger/` and `release/` respectively.
 
 # Verify Table and Plots
