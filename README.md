@@ -1,6 +1,6 @@
 # Tables
 
-To look at all tables, simply navigate to the folder `./tables`.
+To look at all tables that resulted from the asymptotic experiments, simply navigate to the folder `./tables`. If the tables don't show in the Browser, download the PDFs.
 
 # Setup for verification
 
