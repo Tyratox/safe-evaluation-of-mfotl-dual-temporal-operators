@@ -4,7 +4,7 @@ To look at all tables that resulted from the asymptotic experiments, simply navi
 
 # Setup for verification
 
-1. Build `monpoly` from the code of [commit  16d4a16](https://bitbucket.org/jshs/monpoly/commits/16d4a1663e5eaf25f3fed0b43cc29188ac28c070): [Download](https://bitbucket.org/jshs/monpoly/get/16d4a1663e5eaf25f3fed0b43cc29188ac28c070.tar.gz).
+1. Build `monpoly` from the code of [commit   d845e5e](https://bitbucket.org/jshs/monpoly/commits/d845e5e00cf5b63a327b0572d63cddd009d5146b): [Download](https://bitbucket.org/jshs/monpoly/get/d845e5e00cf5b63a327b0572d63cddd009d5146b.tar.gz).
 
 A copy of the directories `trigger-performance-evaluation` and `release-performance-evaluation` can also be found in this repo.
 
