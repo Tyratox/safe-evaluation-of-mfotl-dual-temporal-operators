@@ -1,15 +1,14 @@
 # Tables
-
-To look at all tables that resulted from the asymptotic experiments, simply navigate to the folder [`./tables`](https://github.com/Tyratox/safe-evaluation-of-mfotl-dual-temporal-operators/tree/main/tables). If the tables don't show in the Browser, download the PDFs.
+For brevity, not all tables obtained from the performance evaluation are listed in the [thesis](https://github.com/Tyratox/safe-evaluation-of-mfotl-dual-temporal-operators/blob/main/thesis.pdf). To look at all tables that resulted from the asymptotic experiments, simply navigate to the folder [`./tables`](https://github.com/Tyratox/safe-evaluation-of-mfotl-dual-temporal-operators/tree/main/tables). If the tables don't show in the Browser, download the PDFs.
 
 # Setup for verification
 
-1. Download / Clone this repo including a copy of the [monpoly](https://bitbucket.org/jshs/monpoly/src) version described in the thesis.
+1. Download / Clone this repo including a copy of the [monpoly](https://bitbucket.org/jshs/monpoly/src) version described in the [thesis](https://github.com/Tyratox/safe-evaluation-of-mfotl-dual-temporal-operators/blob/main/thesis.pdf).
 2. Build `monpoly`, see instructions [here](https://github.com/Tyratox/safe-evaluation-of-mfotl-dual-temporal-operators/blob/main/README-monpoly.md)
 
 # Verify Tables
 
-If you just want to verify the generation of tables in the thesis, skip the first few steps in Experiments and just run `table-generator.py`, `asymptotic-table-generator.py` and `asymptotic-table-generator-rewritten.py` directly on the downloaded data (CSVs).
+If you just want to verify the generation of tables in the [thesis](https://github.com/Tyratox/safe-evaluation-of-mfotl-dual-temporal-operators/blob/main/thesis.pdf), skip the first few steps in Experiments and just run `table-generator.py`, `asymptotic-table-generator.py` and `asymptotic-table-generator-rewritten.py` directly on the downloaded data (CSVs).
 
 # Verify Experiments
 ## Comparison Experiments for Trigger
@@ -17,9 +16,9 @@ If you just want to verify the generation of tables in the thesis, skip the firs
 Relevant scripts: `table-generator.py`, `generate-experiments.py`, `log-generator.py`, `measure.sh`, `measure-single.sh`.
 
 1. `cd trigger-performance-evaluation/`
-2. In order to verify the results of the thesis, the same experiments should be downloaded but it is also possible to generate new ones.
+2. In order to verify the results of the [thesis](https://github.com/Tyratox/safe-evaluation-of-mfotl-dual-temporal-operators/blob/main/thesis.pdf), the same experiments should be downloaded but it is also possible to generate new ones.
 	
-	- Download the experiments `experiments-comparison.zip` used in the thesis from [here](https://github.com/Tyratox/safe-evaluation-of-mfotl-dual-temporal-operators/releases/tag/1.0) and extract them to the folder `./experiments`.
+	- Download the experiments `experiments-comparison.zip` used in the [thesis](https://github.com/Tyratox/safe-evaluation-of-mfotl-dual-temporal-operators/blob/main/thesis.pdf) from [here](https://github.com/Tyratox/safe-evaluation-of-mfotl-dual-temporal-operators/releases/tag/1.0) and extract them to the folder `./experiments`.
 	
 	- Run `python generate-experiments.py`. This will create the folder `./experiments` in the current working directory and fill it with the different experiments. Internally `generate-experiments.py` executes `log-generator.py` and hence one should set the current working directory to be the folder containing the two scripts. (Step 1)
 	
@@ -31,9 +30,9 @@ Relevant scripts: `table-generator.py`, `generate-experiments.py`, `log-generato
 Relevant scripts: `asymptotic-table-generator.py`, `asymptotic-table-generator-rewritten.py`, `generate-asymptotic-experiments.py`, `log-generator.py`, `measure-asymptotic.sh`, `measure-single-asymptotic.sh`.
 
 1. `cd trigger-performance-evaluation/`
-2. In order to verify the results of the thesis, the same experiments should be downloaded but it is also possible to generate new ones.
+2. In order to verify the results of the [thesis](https://github.com/Tyratox/safe-evaluation-of-mfotl-dual-temporal-operators/blob/main/thesis.pdf), the same experiments should be downloaded but it is also possible to generate new ones.
 	
-	- Download the experiments `experiments-asymptotic-trigger.zip` and `experiments-asymptotic-rewritten-trigger.zip` used in the thesis from [here](https://github.com/Tyratox/safe-evaluation-of-mfotl-dual-temporal-operators/releases/tag/1.0) and extract them to the folders `./experiments-asymptotic` and `./experiments-asymptotic-rewritten`.
+	- Download the experiments `experiments-asymptotic-trigger.zip` and `experiments-asymptotic-rewritten-trigger.zip` used in the [thesis](https://github.com/Tyratox/safe-evaluation-of-mfotl-dual-temporal-operators/blob/main/thesis.pdf) from [here](https://github.com/Tyratox/safe-evaluation-of-mfotl-dual-temporal-operators/releases/tag/1.0) and extract them to the folders `./experiments-asymptotic` and `./experiments-asymptotic-rewritten`.
 	
 	- Run `generate-asymptotic-experiments.py --output {DIR} --length {l} --n {n} --intervals {Is} --asymptotics {asym}`. This will create the folder `{DIR}` and fill it with the different experiments. The parameters `l` and `n` set the values for the baseline. `Is` and `asym` both allow multiple arguments. The different arguments must be enclosed in `"` and seperated by spaces. `Is` must be a subset of `"[0,*]", "[0, b]", "[a,*]", "[a,b]"` and `asym` a subset of `"2n", "2l", "2c", "4n", "4l", "4c", "8n", "8l", "8c"` where `c` corresponds to increasing both `l` and `n`. Internally `generate-asymptotic-experiments.py` executes `log-generator.py` and hence one should set the current working directory to be the folder containing the two scripts. (Step 1)
 	
@@ -50,9 +49,9 @@ Relevant scripts: `asymptotic-table-generator.py`, `asymptotic-table-generator-r
 Relevant scripts: `asymptotic-table-generator-rewritten.py`, `generate-asymptotic-experiments.py`, `log-generator.py`, `measure-asymptotic.sh`, `measure-single-asymptotic.sh`.
 
 1. `cd release-performance-evaluation/`
-2. In order to verify the results of the thesis, the same experiments should be downloaded but it is also possible to generate new ones.
+2. In order to verify the results of the [thesis](https://github.com/Tyratox/safe-evaluation-of-mfotl-dual-temporal-operators/blob/main/thesis.pdf), the same experiments should be downloaded but it is also possible to generate new ones.
 	
-	- Download the experiments `experiments-asymptotic-rewritten-release.zip` used in the thesis from [here](https://github.com/Tyratox/safe-evaluation-of-mfotl-dual-temporal-operators/releases/tag/1.0) and extract them to the folder `./experiments-asymptotic-rewritten`.
+	- Download the experiments `experiments-asymptotic-rewritten-release.zip` used in the [thesis](https://github.com/Tyratox/safe-evaluation-of-mfotl-dual-temporal-operators/blob/main/thesis.pdf) from [here](https://github.com/Tyratox/safe-evaluation-of-mfotl-dual-temporal-operators/releases/tag/1.0) and extract them to the folder `./experiments-asymptotic-rewritten`.
 	
 	- Run `generate-asymptotic-experiments.py --output {DIR} --length {l} --n {n} --intervals {Is} --asymptotics {asym}`. The parameters are the same as the ones described in step two of "Asymptotic Experiments for Trigger". Internally `generate-asymptotic-experiments.py` also executes `log-generator.py` and hence one should set the current working directory to be the folder containing the two scripts. (Step 1) Note that the files `generate-asymptotic-experiments.py` and `log-generator.py` are different for Trigger and Release.
 
