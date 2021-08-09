@@ -1,0 +1,12 @@
+*.o
+_build
+/monpoly.install
+
+*~
+\#*\#
+
+/thys/*/*.ocaml
+
+trigger-performance-evaluation/experiments*/
+trigger-performance-evaluation/asymptotic-experiments*/
+release-performance-evaluation/experiments*/

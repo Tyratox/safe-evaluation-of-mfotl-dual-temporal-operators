@@ -1,0 +1,13 @@
+lib: [
+  "_build/install/default/lib/monpoly-dev/META"
+  "_build/install/default/lib/monpoly-dev/dune-package"
+  "_build/install/default/lib/monpoly-dev/opam"
+]
+bin: [
+  "_build/install/default/bin/monpoly"
+]
+doc: [
+  "_build/install/default/doc/monpoly-dev/CHANGES"
+  "_build/install/default/doc/monpoly-dev/LICENSE"
+  "_build/install/default/doc/monpoly-dev/README.md"
+]

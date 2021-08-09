@@ -1,12 +1,11 @@
 # Tables
 
-To look at all tables that resulted from the asymptotic experiments, simply navigate to the folder `./tables`. If the tables don't show in the Browser, download the PDFs.
+To look at all tables that resulted from the asymptotic experiments, simply navigate to the folder [`./tables`](https://github.com/Tyratox/safe-evaluation-of-mfotl-dual-temporal-operators/tree/main/tables). If the tables don't show in the Browser, download the PDFs.
 
 # Setup for verification
 
-1. Build `monpoly` from the code of [commit   d845e5e](https://bitbucket.org/jshs/monpoly/commits/d845e5e00cf5b63a327b0572d63cddd009d5146b): [Download](https://bitbucket.org/jshs/monpoly/get/d845e5e00cf5b63a327b0572d63cddd009d5146b.tar.gz).
-
-A copy of the directories `trigger-performance-evaluation` and `release-performance-evaluation` can also be found in this repo.
+1. Download / Clone this repo
+2. Build `monpoly`, see instructions [here](https://github.com/Tyratox/safe-evaluation-of-mfotl-dual-temporal-operators/blob/main/README-monpoly.md)
 
 # Verify Tables
 
