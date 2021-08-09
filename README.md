@@ -4,7 +4,7 @@ To look at all tables that resulted from the asymptotic experiments, simply navi
 
 # Setup for verification
 
-1. Download / Clone this repo
+1. Download / Clone this repo including a copy of the [monpoly](https://bitbucket.org/jshs/monpoly/src) version described in the thesis.
 2. Build `monpoly`, see instructions [here](https://github.com/Tyratox/safe-evaluation-of-mfotl-dual-temporal-operators/blob/main/README-monpoly.md)
 
 # Verify Tables
