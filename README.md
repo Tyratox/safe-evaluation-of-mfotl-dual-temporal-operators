@@ -9,7 +9,7 @@ Note that the included `verified.ml` file was exported from the development vers
 2. Install the [Archive of Formal Proofs](https://www.isa-afp.org/index.html)
 3. Download / Clone this repo including a copy of the [monpoly](https://bitbucket.org/jshs/monpoly/src) version described in the [thesis](https://github.com/Tyratox/safe-evaluation-of-mfotl-dual-temporal-operators/blob/main/thesis.pdf)
 4. Run `isabelle build -d '$AFP' -o browser_info -c -e -v -D thys/` from the project root.
-5. Copy the generated `verified.ml` to `src/`
+5. Copy the generated `verified.ocaml` to `src/verified.ml`
 
 # Build MonPoly
 
