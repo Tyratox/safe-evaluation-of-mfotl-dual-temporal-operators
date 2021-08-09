@@ -145,23 +145,23 @@ for experiment_name in experiments:
         #exp = exp.fillna(1.0)
         #exp = exp.round(2).astype(str)
 
-        exp['parameters'] = exp['asymptotic'].apply(lambda x: 'n, l' if x == 'c' else '2n, 2l' if x == '2c' else '4n, 4l' if x == '4c' else '8n, 8l' if x == "8c" else x)
-        exp['time'] = exp['mean rewritten meval time']
-        exp['std'] = exp['std rewritten meval time']
-        exp['ratio'] = exp['factor rewritten meval time']
+        exp[r'$parameters$'] = exp['asymptotic'].apply(lambda x: 'n, l' if x == 'c' else '2n, 2l' if x == '2c' else '4n, 4l' if x == '4c' else '8n, 8l' if x == "8c" else x)
+        exp[r'$time \texttt{meval}$'] = exp['mean rewritten meval time']
+        exp[r'$std$'] = exp['std rewritten meval time']
+        exp[r'$ratio$'] = exp['factor rewritten meval time']
 
         if use_stds:
-            t = t.append(exp[['parameters', 'time', 'std', 'ratio']])
+            t = t.append(exp[[r'$parameters$', r'$time \texttt{meval}$', r'$std$', r'$ratio$']])
         else:
-            t = t.append(exp[['parameters', 'time', 'ratio']])
+            t = t.append(exp[[r'$parameters$', r'$time \texttt{meval}$', r'$ratio$']])
 
     if not(os.path.isdir(os.path.join(output))):
         os.makedirs(os.path.join(output))
 
     if use_stds:
-        latex = t.to_latex(index=False, column_format="l r r r", escape=False, float_format="%.2f", na_rep="")
+        latex = t.to_latex(index=False, column_format="L R R R", escape=False, float_format="%.2f", na_rep="")
     else:
-        latex = t.to_latex(index=False, column_format="l r r", escape=False, float_format="%.2f", na_rep="")
+        latex = t.to_latex(index=False, column_format="L R R", escape=False, float_format="%.2f", na_rep="")
 
     latex_list = latex.splitlines()
     latex_list.insert(len(latex_list)-6, '\midrule')
@@ -184,7 +184,7 @@ for experiment_name in experiments:
 
         with open(path, 'r') as original: data = original.read()
         with open(path, 'w') as modified:
-            modified.write(r'\documentclass{article}\usepackage{booktabs}\pagestyle{empty}\begin{document}' + '\n' + \
+            modified.write(r'\documentclass{article}\usepackage{booktabs}\usepackage{array}\newcolumntype{L}{>{$}l<{$}}\newcolumntype{R}{>{$}r<{$}}\pagestyle{empty}\begin{document}' + '\n' + \
                 r'\begin{table}\centering' + '\n' + data + r'\\[1ex]' + '\n' + \
                     r'$l$ = ' + l + r', $n$ = ' + n + r'\\[0.5ex]' + \
                     r'\begin{tabular}{l @{$\:$} l}' + '\n' + caption + '\n' + r'\end{tabular}' + '\n' \

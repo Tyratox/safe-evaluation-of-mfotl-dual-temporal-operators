@@ -1,10 +1,19 @@
 # Tables
 For brevity, not all tables obtained from the performance evaluation are listed in the [thesis](https://github.com/Tyratox/safe-evaluation-of-mfotl-dual-temporal-operators/blob/main/thesis.pdf). To look at all tables that resulted from the asymptotic experiments, simply navigate to the folder [`./tables`](https://github.com/Tyratox/safe-evaluation-of-mfotl-dual-temporal-operators/tree/main/tables). If the tables don't show in the Browser, download the PDFs.
 
-# Setup for verification
+# Build VeriMon
 
-1. Download / Clone this repo including a copy of the [monpoly](https://bitbucket.org/jshs/monpoly/src) version described in the [thesis](https://github.com/Tyratox/safe-evaluation-of-mfotl-dual-temporal-operators/blob/main/thesis.pdf).
-2. Build `monpoly`, see instructions [here](https://github.com/Tyratox/safe-evaluation-of-mfotl-dual-temporal-operators/blob/main/README-monpoly.md)
+Note that the included `verified.ml` file was exported from the development version of Isabelle so that new code equations could be used which reduce the running time of VeriMon. The results obtained when running VeriMon on the experiments using a `verified.ml` build from this source might differ slightly but the qualitative results should be the same due to the imported theory `RBT_set_opt.thy` that includes some of these code equations.
+
+1. Setup Isabelle. The formalization is written for [Isabelle2021](https://isabelle.in.tum.de/website-Isabelle2021/), installation instructions can be found [here](https://isabelle.in.tum.de/website-Isabelle2021/installation.html).
+2. Install the [Archive of Formal Proofs](https://www.isa-afp.org/index.html)
+3. Download / Clone this repo including a copy of the [monpoly](https://bitbucket.org/jshs/monpoly/src) version described in the [thesis](https://github.com/Tyratox/safe-evaluation-of-mfotl-dual-temporal-operators/blob/main/thesis.pdf)
+4. Run `isabelle build -d '$AFP' -o browser_info -c -e -v -D thys/` from the project root.
+5. Copy the generated `verified.ml` to `src/`
+
+# Build MonPoly
+
+To build `monpoly`, see the [following instructions](https://github.com/Tyratox/safe-evaluation-of-mfotl-dual-temporal-operators/blob/main/README-monpoly.md).
 
 # Verify Tables
 
