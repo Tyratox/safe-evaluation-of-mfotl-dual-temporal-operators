@@ -23,7 +23,7 @@ If you just want to verify the generation of tables in the [thesis](https://gith
 
 ## Requirements
 
-The python scripts have the following dependencies:
+The python scripts have the following dependencies and should be run using python 3:
 
 - [numpy](https://numpy.org/)
 - [pandas](https://pandas.pydata.org/)
