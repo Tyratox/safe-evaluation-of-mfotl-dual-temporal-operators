@@ -7,7 +7,7 @@ Note that the included `verified.ml` file was exported from the development vers
 
 1. Setup Isabelle. The formalization is written for [Isabelle2021](https://isabelle.in.tum.de/website-Isabelle2021/), installation instructions can be found [here](https://isabelle.in.tum.de/website-Isabelle2021/installation.html).
 2. Install the [Archive of Formal Proofs](https://www.isa-afp.org/index.html)
-3. Download / Clone this repo including a copy of the [monpoly](https://bitbucket.org/jshs/monpoly/src) version described in the [thesis](https://github.com/Tyratox/safe-evaluation-of-mfotl-dual-temporal-operators/blob/main/thesis.pdf)
+3. Download / Clone this repo including a copy of the [monpoly](https://bitbucket.org/jshs/monpoly/src) version described in the [thesis](https://github.com/Tyratox/safe-evaluation-of-mfotl-dual-temporal-operators/blob/main/thesis.pdf) (Commit [ 79333fc](https://bitbucket.org/jshs/monpoly/commits/79333fca055d6ee92a5a69a42e0567a59d5f31f3))
 4. Run `isabelle build -d '$AFP' -o browser_info -c -e -v -D thys/` from the project root.
 5. Copy the generated `verified.ocaml` to `src/verified.ml`
 
@@ -20,6 +20,14 @@ To build `monpoly`, see the [following instructions](https://github.com/Tyratox/
 If you just want to verify the generation of tables in the [thesis](https://github.com/Tyratox/safe-evaluation-of-mfotl-dual-temporal-operators/blob/main/thesis.pdf), skip the first few steps in Experiments and just run `table-generator.py`, `asymptotic-table-generator.py` and `asymptotic-table-generator-rewritten.py` directly on the downloaded data (CSVs).
 
 # Verify Experiments
+
+## Requirements
+
+The python scripts have the following dependencies:
+
+- [numpy](https://numpy.org/)
+- [pandas](https://pandas.pydata.org/)
+
 ## Comparison Experiments for Trigger
 
 Relevant scripts: `table-generator.py`, `generate-experiments.py`, `log-generator.py`, `measure.sh`, `measure-single.sh`.
@@ -47,11 +55,11 @@ Relevant scripts: `asymptotic-table-generator.py`, `asymptotic-table-generator-r
 	
 3. Run `./measure-asymptotic.sh ./experiments-asymptotic {asym} native ./measurements-asymptotic.csv`. This will run all experiments in the folder `./experiments-asymptotic` 10 times using the specialized algorithm by executing `./measure-single-asymptotic.sh` multiple times and write the results to `./measurements-asymptotic.csv`. The parameter `asym` once again contains the asymptotic values that should be measured but in contrast to step 3 the format required for bash is a little different: For the bash script all values must be passed as a single string enclosed in quotes, separated by spaces, e.g. `"2l 2n 8n 4l"`.
 
-4. Run `asymptotic-table-generator.py --measurements ./measurements-asymptotic.csv --output {DIR}`. This will generate a table per experiment in the folder `DIR` in a `.tex` file. For a pdf, add the flag `--pdf` and for standard deviations add `--stds`.
+4. Run `asymptotic-table-generator.py --measurements ./measurements-asymptotic.csv --output {DIR}`. This will generate a table per experiment in the folder `DIR` in a `.tex` file. For a pdf, add the flag `--pdf` and for standard deviations add `--stds`. The `--pdf` flag requires `pdflatex` and `pdfcrop` to be installed.
 
 5. Run `./measure-asymptotic.sh ./experiments-asymptotic-rewritten {asym} rewritten ./measurements-asymptotic-rewritten.csv`. This will run all experiments in the folder `./experiments-asymptotic-rewritten` 10 times using the translated formulas by executing `./measure-single-asymptotic.sh` multiple times and write the results to `./measurements-asymptotic-rewritten.csv`.
 
-6. Run `asymptotic-table-generator-rewritten.py --measurements ./measurements-asymptotic-rewritten.csv --output {DIR}`. This will generate a table per experiment in the folder `DIR` in a `.tex` file. For a pdf, add the flag `--pdf` and for standard deviations add `--stds`.
+6. Run `asymptotic-table-generator-rewritten.py --measurements ./measurements-asymptotic-rewritten.csv --output {DIR}`. This will generate a table per experiment in the folder `DIR` in a `.tex` file. For a pdf, add the flag `--pdf` and for standard deviations add `--stds`. The `--pdf` flag requires `pdflatex` and `pdfcrop` to be installed.
 
 ## Asymptotic Experiments for Release
 
@@ -66,4 +74,8 @@ Relevant scripts: `asymptotic-table-generator-rewritten.py`, `generate-asymptoti
 
 3. Run `./measure-asymptotic.sh ./experiments-asymptotic-rewritten {asym} ./measurements-asymptotic-rewritten.csv`. This will run all experiments in the folder `./experiments-asymptotic-rewritten` 10 times using the translated formulas for Release by executing `./measure-single-asymptotic.sh` multiple times and write the results to `./measurements-asymptotic-rewritten.csv`.
 
-4. Run `../trigger-performance-evaluation/asymptotic-table-generator-rewritten.py --measurements ./measurements-asymptotic-rewritten.csv --output {DIR}`. This will generate a table per experiment in the folder `DIR` in a `.tex` file. For a pdf, add the flag `--pdf` and for standard deviations add `--stds`. Note that the script `asymptotic-table-generator-rewritten.py` is the same for Trigger and Release.
+4. Run `../trigger-performance-evaluation/asymptotic-table-generator-rewritten.py --measurements ./measurements-asymptotic-rewritten.csv --output {DIR}`. This will generate a table per experiment in the folder `DIR` in a `.tex` file. For a pdf, add the flag `--pdf` and for standard deviations add `--stds`. The `--pdf` flag requires `pdflatex` and `pdfcrop` to be installed. Note that the script `asymptotic-table-generator-rewritten.py` is the same for Trigger and Release.
+
+## Rendering the .tex tables
+
+In order to compile the generated tables yourself, some additional packages and definitions are required. They are all listed in `compile-table.tex` and this file can be used in order to render the tex files manually instead of using the `--pdf` flag.

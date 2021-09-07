@@ -3,8 +3,6 @@ import random
 import os
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-from matplotlib.lines import Line2D
 
 asymptotic_order = ["l", "2l", "4l", "8l",
                     "n", "2n", "4n", "8n",
@@ -132,8 +130,14 @@ for experiment_name in experiments:
                          sort_remaining=False, key=index_to_key)
 
     exp = exp.reset_index()
+    exp_orig = exp.copy()
+
+    asym = exp_orig.apply(lambda x : x['asymptotic'][-1], axis = 1)
+    l_count = len(asym[asym == 'l'].index)
+    n_count = len(asym[asym == 'n'].index)
+    c_count = len(asym[asym == 'c'].index)
     
-    dfs = [exp.iloc[:4].copy().reset_index(drop=True), exp.iloc[4:8].copy().reset_index(drop=True), exp.iloc[8:].copy().reset_index(drop=True)]
+    dfs = [exp.iloc[:l_count].copy().reset_index(drop=True), exp.iloc[l_count:(l_count + n_count)].copy().reset_index(drop=True), exp.iloc[(l_count + n_count):].copy().reset_index(drop=True)]
     t = pd.DataFrame()
 
     for asym, exp in zip(['l', 'n', 'c'], dfs):
@@ -164,8 +168,13 @@ for experiment_name in experiments:
         latex = t.to_latex(index=False, column_format="L R R", escape=False, float_format="%.2f", na_rep="")
 
     latex_list = latex.splitlines()
-    latex_list.insert(len(latex_list)-6, '\midrule')
-    latex_list.insert(len(latex_list)-11, '\midrule')
+    # 2 lines are on the bottom of the file
+    # then add one line -(2 + #num of c)
+
+    latex_list.insert(len(latex_list)-(2 + c_count), '\midrule')
+
+    # add another one at -(2 + #num of c + 1 + #num of n)
+    latex_list.insert(len(latex_list)-(2 + c_count + 1 + n_count), '\midrule')
 
     l, n = exp_to_params(experiment_name)
 
